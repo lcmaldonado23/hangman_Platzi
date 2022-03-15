@@ -3,6 +3,9 @@ import os
 from hangman_figures.hangman_figures import hangman_figures
 
 
+clearConsole =lambda: os.system('cls' if os.name in ('nt', 'dos') else 'clear')
+
+
 def read_data(filepath="./base_de_datos/data.txt"):
     words = []
     with open(filepath, "r", encoding="utf-8") as f:
@@ -40,7 +43,7 @@ def hangman_game():
     failures = 0
     guessed_words = []
     while True:
-        os.system("cls") # Si estás en Unix (Mac o Linux) cambia cls por clear
+        clearConsole()
         print("¡Adivina la palabra!")
         if (len(hangman_figures) - 1 - failures) == 1:
             print(f"Tienes {len(hangman_figures) - 1 - failures} oportunidad restante.")
@@ -75,13 +78,13 @@ def hangman_game():
         
 
         if "_" not in chosen_word_list_underscores:
-            os.system("cls") # Si estás en Unix (Mac o Linux) cambia cls por clear
+            clearConsole()
             print("¡Ganaste! La palabra era " + chosen_word + ".\n")
             break
 
 
         if failures == (len(hangman_figures) - 1):
-            os.system("cls") # Si estás en Unix (Mac o Linux) cambia cls por clear
+            clearConsole()
             print("¡Perdiste! La palabra era " + chosen_word + ".")
             print(hangman_figures[failures])
             print("\n")
